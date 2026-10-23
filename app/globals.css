@@ -1209,10 +1209,7 @@ main {
 
 @media (max-width: 34rem) {
   .hero::before {
-    width: 14rem;
-    height: 14rem;
-    top: -2rem;
-    right: -2rem;
+    display: none;
   }
 
   .plan-meta span + span::before {
@@ -1291,8 +1288,9 @@ main {
   }
 
   /* Containers on print: strip their side padding so content uses full width */
-  .workspace > div {
+  .workspace .max-w-6xl {
     padding: 0 !important;
+    max-width: none !important;
   }
 
   .plan-header {
