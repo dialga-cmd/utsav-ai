@@ -40,16 +40,14 @@ const WEDDING_TASKS: readonly TimelineTemplate[] = [
   {
     id: "wedding-pandit",
     title: "Confirm pandit and puja samagri",
-    description:
-      "Share family customs and muhurat preferences; agree the rituals list.",
+    description: "Share family customs and muhurat preferences; agree the rituals list.",
     phase: "Rituals",
     leadDays: 120,
   },
   {
     id: "wedding-caterer",
     title: "Shortlist caterer and do a tasting",
-    description:
-      "Confirm per-plate rate, veg/non-veg counters, staff and water.",
+    description: "Confirm per-plate rate, veg/non-veg counters, staff and water.",
     phase: "Food",
     leadDays: 120,
   },
@@ -64,56 +62,49 @@ const WEDDING_TASKS: readonly TimelineTemplate[] = [
   {
     id: "wedding-haldi",
     title: "Plan haldi ceremony",
-    description:
-      "Choose a daytime space, marigold decor, seating and simple snacks.",
+    description: "Choose a daytime space, marigold decor, seating and simple snacks.",
     phase: "Ceremonies",
     leadDays: 90,
   },
   {
     id: "wedding-invites",
     title: "Send save-the-dates and invitations",
-    description:
-      "Finalise the guest count estimate, digital invites and printed cards.",
+    description: "Finalise the guest count estimate, digital invites and printed cards.",
     phase: "Communication",
     leadDays: 75,
   },
   {
     id: "wedding-mehendi",
     title: "Book mehendi artist and plan mehendi",
-    description:
-      "Confirm artist capacity, shade preferences, seating and music.",
+    description: "Confirm artist capacity, shade preferences, seating and music.",
     phase: "Ceremonies",
     leadDays: 60,
   },
   {
     id: "wedding-decor",
     title: "Finalise decor and mandap design",
-    description:
-      "Approve the mood board, flower plan, entry, stage and removal timing.",
+    description: "Approve the mood board, flower plan, entry, stage and removal timing.",
     phase: "Looks",
     leadDays: 60,
   },
   {
     id: "wedding-sangeet",
     title: "Lock sangeet performances and sound",
-    description:
-      "Build a run sheet, rehearsal slots, playlist and microphone plan.",
+    description: "Build a run sheet, rehearsal slots, playlist and microphone plan.",
     phase: "Ceremonies",
     leadDays: 45,
   },
   {
     id: "wedding-music",
     title: "Confirm band, DJ and sound permits",
-    description:
-      "Check local sound limits, power load and the vendor's backup plan.",
+    description: "Check local sound limits, power load and the vendor's backup plan.",
     phase: "Entertainment",
     leadDays: 45,
   },
   {
     id: "wedding-pheras",
     title: "Finalise pheras and reception run sheet",
-    description:
-      "Share timings with the pandit, family leads and venue coordinator.",
+    description: "Share timings with the pandit, family leads and venue coordinator.",
     phase: "Ceremonies",
     leadDays: 30,
   },
@@ -128,16 +119,14 @@ const WEDDING_TASKS: readonly TimelineTemplate[] = [
   {
     id: "wedding-headcount",
     title: "Give final headcount to caterer",
-    description:
-      "Reconcile RSVPs, vendor meals and children's plates before the cutoff.",
+    description: "Reconcile RSVPs, vendor meals and children's plates before the cutoff.",
     phase: "Food",
     leadDays: 10,
   },
   {
     id: "wedding-payments",
     title: "Release final vendor payments",
-    description:
-      "Keep signed quotes, receipts and a small cash contingency on hand.",
+    description: "Keep signed quotes, receipts and a small cash contingency on hand.",
     phase: "Logistics",
     leadDays: 5,
   },
@@ -155,24 +144,21 @@ const BIRTHDAY_TASKS: readonly TimelineTemplate[] = [
   {
     id: "birthday-venue",
     title: "Book venue or plan the home setup",
-    description:
-      "Confirm capacity, timing limits, parking, power and cleanup rules.",
+    description: "Confirm capacity, timing limits, parking, power and cleanup rules.",
     phase: "Foundation",
     leadDays: 45,
   },
   {
     id: "birthday-theme",
     title: "Choose theme and guest list",
-    description:
-      "Match the theme to the child's age, space and number of children.",
+    description: "Match the theme to the child's age, space and number of children.",
     phase: "Planning",
     leadDays: 35,
   },
   {
     id: "birthday-invites",
     title: "Send invitations",
-    description:
-      "Include age, timing, food, parking and RSVP details for parents.",
+    description: "Include age, timing, food, parking and RSVP details for parents.",
     phase: "Communication",
     leadDays: 21,
   },
@@ -187,40 +173,35 @@ const BIRTHDAY_TASKS: readonly TimelineTemplate[] = [
   {
     id: "birthday-decor",
     title: "Confirm cake and decor",
-    description:
-      "Approve eggless options, delivery timing, backdrop and cleanup.",
+    description: "Approve eggless options, delivery timing, backdrop and cleanup.",
     phase: "Looks",
     leadDays: 14,
   },
   {
     id: "birthday-caterer",
     title: "Finalise food and drinks",
-    description:
-      "Plan child-friendly portions, allergies, water and serving staff.",
+    description: "Plan child-friendly portions, allergies, water and serving staff.",
     phase: "Food",
     leadDays: 14,
   },
   {
     id: "birthday-gifts",
     title: "Pack return gifts and game prizes",
-    description:
-      "Check age suitability, choking hazards and an extra handful of gifts.",
+    description: "Check age suitability, choking hazards and an extra handful of gifts.",
     phase: "Activities",
     leadDays: 10,
   },
   {
     id: "birthday-headcount",
     title: "Confirm final headcount",
-    description:
-      "Reconcile RSVPs with cake portions, seating, plates and gifts.",
+    description: "Reconcile RSVPs with cake portions, seating, plates and gifts.",
     phase: "Food",
     leadDays: 5,
   },
   {
     id: "birthday-setup",
     title: "Day-before setup and safety check",
-    description:
-      "Clear trip hazards, charge cameras, pack first aid and label food.",
+    description: "Clear trip hazards, charge cameras, pack first aid and label food.",
     phase: "Logistics",
     leadDays: 1,
   },
@@ -230,56 +211,49 @@ const COMMUNITY_TASKS: readonly TimelineTemplate[] = [
   {
     id: "community-committee",
     title: "Form a small organising committee",
-    description:
-      "Name leads for permissions, money, volunteers, safety and programme.",
+    description: "Name leads for permissions, money, volunteers, safety and programme.",
     phase: "Foundation",
     leadDays: 60,
   },
   {
     id: "community-permissions",
     title: "Apply for permissions",
-    description:
-      "Submit society, school or municipal requests and keep copies on site.",
+    description: "Submit society, school or municipal requests and keep copies on site.",
     phase: "Approvals",
     leadDays: 45,
   },
   {
     id: "community-venue",
     title: "Confirm venue and access",
-    description:
-      "Check power, water, toilets, parking, accessibility and cleanup duty.",
+    description: "Check power, water, toilets, parking, accessibility and cleanup duty.",
     phase: "Foundation",
     leadDays: 30,
   },
   {
     id: "community-volunteers",
     title: "Open volunteer sign-up",
-    description:
-      "Assign two people per station and publish a simple WhatsApp group.",
+    description: "Assign two people per station and publish a simple WhatsApp group.",
     phase: "People",
     leadDays: 30,
   },
   {
     id: "community-safety",
     title: "Write the safety and crowd plan",
-    description:
-      "Mark exits, first aid, fire points, lost-child desk and a safety lead.",
+    description: "Mark exits, first aid, fire points, lost-child desk and a safety lead.",
     phase: "Safety",
     leadDays: 21,
   },
   {
     id: "community-promotion",
     title: "Start local promotion",
-    description:
-      "Share posters and notices with a clear date, time, entry and contact.",
+    description: "Share posters and notices with a clear date, time, entry and contact.",
     phase: "Communication",
     leadDays: 21,
   },
   {
     id: "community-sound",
     title: "Book sound, power and lighting",
-    description:
-      "Confirm load, backup, sound limits, operators and weather protection.",
+    description: "Confirm load, backup, sound limits, operators and weather protection.",
     phase: "Logistics",
     leadDays: 14,
   },
@@ -294,16 +268,14 @@ const COMMUNITY_TASKS: readonly TimelineTemplate[] = [
   {
     id: "community-programme",
     title: "Lock the programme run sheet",
-    description:
-      "Time every performance, game and speech; share it with all leads.",
+    description: "Time every performance, game and speech; share it with all leads.",
     phase: "Programme",
     leadDays: 10,
   },
   {
     id: "community-decor",
     title: "Prepare reusable decor and signage",
-    description:
-      "Label directions, stage, help desk and first aid clearly.",
+    description: "Label directions, stage, help desk and first aid clearly.",
     phase: "Looks",
     leadDays: 7,
   },
@@ -336,10 +308,7 @@ function urgencyFor(
   if (daysUntil <= URGENT_WINDOW_DAYS) return "urgent";
   if (compressionRatio >= URGENT_COMPRESSION_RATIO) return "urgent";
   if (dueOffset <= URGENT_WINDOW_DAYS) return "urgent";
-  if (
-    compressionRatio >= TIGHT_COMPRESSION_RATIO ||
-    dueOffset <= TIGHT_WINDOW_DAYS
-  ) {
+  if (compressionRatio >= TIGHT_COMPRESSION_RATIO || dueOffset <= TIGHT_WINDOW_DAYS) {
     return "tight";
   }
   return "on_track";
@@ -381,17 +350,11 @@ export function buildTimeline(
   const tasks: TimelineTask[] = templates.map((template) => {
     const taskNeedsCompression = template.leadDays > daysUntil;
     const dueOffset = taskNeedsCompression
-      ? Math.max(
-          0,
-          daysUntil -
-            Math.floor((daysUntil * template.leadDays) / maxLeadDays),
-        )
+      ? Math.max(0, daysUntil - Math.floor((daysUntil * template.leadDays) / maxLeadDays))
       : daysUntil - template.leadDays;
 
     const compressionRatio =
-      template.leadDays > 0
-        ? Math.max(0, 1 - daysUntil / template.leadDays)
-        : 0;
+      template.leadDays > 0 ? Math.max(0, 1 - daysUntil / template.leadDays) : 0;
 
     return {
       id: template.id,

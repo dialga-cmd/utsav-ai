@@ -21,7 +21,10 @@ describe("buildVendorChecklist", () => {
 
     const community = buildVendorChecklist("community");
     expect(
-      community.flatMap((vendor) => vendor.checklist).join(" ").toLowerCase(),
+      community
+        .flatMap((vendor) => vendor.checklist)
+        .join(" ")
+        .toLowerCase(),
     ).toContain("emergency");
     expect(community.some((vendor) => vendor.category === "Safety")).toBe(true);
   });

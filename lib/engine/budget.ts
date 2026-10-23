@@ -1,9 +1,5 @@
 import type { EventBrief } from "@/types/event";
-import type {
-  BudgetBreakdown,
-  BudgetCategory,
-  BudgetTier,
-} from "@/types/plan";
+import type { BudgetBreakdown, BudgetCategory, BudgetTier } from "@/types/plan";
 
 interface BudgetCategoryTemplate {
   id: string;
@@ -86,7 +82,8 @@ const TEMPLATES: Record<EventBrief["eventType"], readonly BudgetCategoryTemplate
       id: "catering",
       label: "Food & catering",
       baseWeight: 25,
-      guidance: "Snacks, mains and drinks; confirm children's portions and serving staff.",
+      guidance:
+        "Snacks, mains and drinks; confirm children's portions and serving staff.",
     },
     {
       id: "cake",
@@ -320,15 +317,12 @@ function contextMultiplier(
  * to `brief.budgetInr`, including tiny and very large budgets.
  */
 export function buildBudget(brief: EventBrief): BudgetBreakdown {
-  const totalInr = Math.min(
-    MAX_BUDGET_INR,
-    Math.max(0, Math.trunc(brief.budgetInr)),
-  );
+  const totalInr = Math.min(MAX_BUDGET_INR, Math.max(0, Math.trunc(brief.budgetInr)));
   const tier = getBudgetTier(totalInr, brief.guests);
   const templates = TEMPLATES[brief.eventType];
 
-  const weights = templates.map((template) =>
-    template.baseWeight * contextMultiplier(template.id, brief, tier),
+  const weights = templates.map(
+    (template) => template.baseWeight * contextMultiplier(template.id, brief, tier),
   );
   const amounts = allocateAmounts(totalInr, weights);
 
@@ -336,15 +330,14 @@ export function buildBudget(brief: EventBrief): BudgetBreakdown {
     id: template.id,
     label: template.label,
     plannedInr: amounts[index],
-    sharePct:
-      totalInr > 0 ? Math.round((amounts[index] / totalInr) * 1_000) / 10 : 0,
+    actualInr: null,
+    sharePct: totalInr > 0 ? Math.round((amounts[index] / totalInr) * 1_000) / 10 : 0,
     guidance: template.guidance,
   }));
 
   return {
     totalInr,
-    perGuestInr:
-      brief.guests > 0 ? Math.round(totalInr / brief.guests) : 0,
+    perGuestInr: brief.guests > 0 ? Math.round(totalInr / brief.guests) : 0,
     tier,
     categories,
   };

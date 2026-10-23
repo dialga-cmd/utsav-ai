@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  differenceInCalendarDays,
-  parseCalendarDate,
-} from "@/lib/engine/date";
+import { differenceInCalendarDays, parseCalendarDate } from "@/lib/engine/date";
 import { buildTimeline } from "@/lib/engine/timeline";
 import { makeBrief } from "@/tests/factories";
 
@@ -22,7 +19,10 @@ describe("buildTimeline", () => {
     expect(event).not.toBeNull();
     expect(venue?.dueDate).toBe("2026-03-20");
     expect(
-      differenceInCalendarDays(parseCalendarDate(venue?.dueDate ?? "") ?? new Date(), event!),
+      differenceInCalendarDays(
+        parseCalendarDate(venue?.dueDate ?? "") ?? new Date(),
+        event!,
+      ),
     ).toBe(270);
     expect(venue?.done).toBe(false);
     expect(result.plan.compressed).toBe(false);
@@ -62,8 +62,7 @@ describe("buildTimeline", () => {
     ).toBe(true);
     expect(
       result.plan.tasks.every(
-        (task) =>
-          (parseCalendarDate(task.dueDate)?.getTime() ?? 0) >= NOW.getTime(),
+        (task) => (parseCalendarDate(task.dueDate)?.getTime() ?? 0) >= NOW.getTime(),
       ),
     ).toBe(true);
   });
@@ -78,9 +77,7 @@ describe("buildTimeline", () => {
 
     expect(result.plan.daysUntil).toBe(0);
     expect(result.plan.tasks.every((task) => task.urgency === "urgent")).toBe(true);
-    expect(result.plan.tasks.every((task) => task.dueDate === "2026-01-15")).toBe(
-      true,
-    );
+    expect(result.plan.tasks.every((task) => task.dueDate === "2026-01-15")).toBe(true);
   });
 
   it("handles leap-day events and month-end dates", () => {
@@ -90,9 +87,7 @@ describe("buildTimeline", () => {
     expect(leap.ok).toBe(true);
     if (leap.ok) {
       expect(leap.plan.daysUntil).toBe(1);
-      expect(leap.plan.tasks.every((task) => parseCalendarDate(task.dueDate))).toBe(
-        true,
-      );
+      expect(leap.plan.tasks.every((task) => parseCalendarDate(task.dueDate))).toBe(true);
     }
 
     const monthEnd = buildTimeline(makeBrief({ eventDate: "2026-03-31" }), {
@@ -119,15 +114,9 @@ describe("buildTimeline", () => {
     const dueDates = result.plan.tasks.map((task) => task.dueDate);
     expect(dueDates).toEqual([...dueDates].sort());
     expect(result.plan.tasks.some((task) => task.title.includes("haldi"))).toBe(true);
-    expect(result.plan.tasks.some((task) => task.title.includes("mehendi"))).toBe(
-      true,
-    );
-    expect(result.plan.tasks.some((task) => task.title.includes("sangeet"))).toBe(
-      true,
-    );
-    expect(result.plan.tasks.some((task) => task.title.includes("pheras"))).toBe(
-      true,
-    );
+    expect(result.plan.tasks.some((task) => task.title.includes("mehendi"))).toBe(true);
+    expect(result.plan.tasks.some((task) => task.title.includes("sangeet"))).toBe(true);
+    expect(result.plan.tasks.some((task) => task.title.includes("pheras"))).toBe(true);
   });
 
   it("includes permissions and safety work for community events", () => {

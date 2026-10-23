@@ -7,6 +7,8 @@ export interface BudgetCategory {
   id: string;
   label: string;
   plannedInr: number;
+  /** User-entered actual spend, or null when not recorded. */
+  actualInr: number | null;
   sharePct: number;
   guidance: string;
 }

@@ -1,18 +1,14 @@
 import { describe, expect, it } from "vitest";
-import {
-  allocateAmounts,
-  buildBudget,
-  getBudgetTier,
-} from "@/lib/engine/budget";
+import { allocateAmounts, buildBudget, getBudgetTier } from "@/lib/engine/budget";
 import { makeBrief } from "@/tests/factories";
 
 describe("allocateAmounts", () => {
   it("allocates the exact total with largest remainders", () => {
     expect(allocateAmounts(100, [1, 1, 1])).toEqual([34, 33, 33]);
     expect(allocateAmounts(101, [1, 1, 1])).toEqual([34, 34, 33]);
-    expect(
-      allocateAmounts(100, [1, 1, 1]).reduce((sum, amount) => sum + amount, 0),
-    ).toBe(100);
+    expect(allocateAmounts(100, [1, 1, 1]).reduce((sum, amount) => sum + amount, 0)).toBe(
+      100,
+    );
   });
 
   it("handles zero, tiny and mixed weights", () => {
@@ -59,9 +55,7 @@ describe("buildBudget", () => {
 
   it("clamps negative and excessive budgets", () => {
     expect(buildBudget(makeBrief({ budgetInr: -50 })).totalInr).toBe(0);
-    expect(buildBudget(makeBrief({ budgetInr: 999_999_999 })).totalInr).toBe(
-      100_000_000,
-    );
+    expect(buildBudget(makeBrief({ budgetInr: 999_999_999 })).totalInr).toBe(100_000_000);
   });
 
   it("handles zero guests without dividing by zero", () => {
@@ -85,9 +79,7 @@ describe("buildBudget", () => {
     const metroVenue = metro.categories.find((item) => item.id === "venue");
     const tier3Venue = tier3.categories.find((item) => item.id === "venue");
 
-    expect(metroVenue?.plannedInr ?? 0).toBeGreaterThan(
-      tier3Venue?.plannedInr ?? 0,
-    );
+    expect(metroVenue?.plannedInr ?? 0).toBeGreaterThan(tier3Venue?.plannedInr ?? 0);
   });
 
   it("adjusts catering for multi-day, premium and non-veg plans", () => {
@@ -98,9 +90,7 @@ describe("buildBudget", () => {
     const baseFood = base.categories.find((item) => item.id === "catering");
     const upgradedFood = upgraded.categories.find((item) => item.id === "catering");
 
-    expect(upgradedFood?.plannedInr ?? 0).toBeGreaterThan(
-      baseFood?.plannedInr ?? 0,
-    );
+    expect(upgradedFood?.plannedInr ?? 0).toBeGreaterThan(baseFood?.plannedInr ?? 0);
   });
 
   it("provides stable guidance for every category", () => {
