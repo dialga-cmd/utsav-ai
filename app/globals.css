@@ -107,13 +107,14 @@ a {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  width: 100%;
 }
 
 .site-header {
   width: 100%;
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 0 auto;
-  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+  padding: 1.25rem clamp(1.5rem, 5vw, 3.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -171,9 +172,9 @@ main {
 }
 
 .site-footer-inner {
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 0 auto;
-  padding: 2rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+  padding: 2rem clamp(1.5rem, 5vw, 3.5rem) 2.5rem;
   display: grid;
   gap: 1.5rem;
 }
@@ -192,16 +193,16 @@ main {
 
 .workspace {
   width: 100%;
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 2.5rem) 2rem;
+  padding: 0 clamp(1.5rem, 5vw, 3.5rem) 2rem;
 }
 
 .hero {
   position: relative;
   display: grid;
   gap: 1.25rem;
-  padding: clamp(1.5rem, 5vw, 3.5rem) 0 1.75rem;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 3vw, 2rem) 1.75rem;
 }
 
 .hero::after {
@@ -228,9 +229,9 @@ main {
 }
 
 .hero-title {
-  max-width: 14ch;
-  font-size: clamp(2.55rem, 7vw, 5.2rem);
-  line-height: 0.99;
+  max-width: 20ch;
+  font-size: clamp(2.55rem, 6.5vw, 5.2rem);
+  line-height: 1.02;
   letter-spacing: -0.045em;
 }
 
