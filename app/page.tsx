@@ -1,7 +1,9 @@
+import { PlanningWorkspace } from "@/components/PlanningWorkspace";
+
 export default function Home() {
   return (
-    <main>
-      <div>Hello world!</div>
+    <main id="main-content">
+      <PlanningWorkspace />
     </main>
   );
 }

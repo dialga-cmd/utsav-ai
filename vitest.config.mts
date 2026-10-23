@@ -14,5 +14,6 @@ export default defineConfig({
     setupFiles: ["./tests/setup.ts"],
     restoreMocks: true,
     clearMocks: true,
+    include: ["tests/**/*.test.{ts,tsx}"],
   },
 });

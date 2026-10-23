@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# Next.js agent rules
+AGENTS.md
+
 # next.js
 /.next/
 /out/

@@ -18,6 +18,12 @@ export const aiExtractionSchema = z.object({
   city: z.string().trim().min(1).max(80).nullable(),
 });
 
+export const extractedEventSchema = aiExtractionSchema.extend({
+  notes: z.string().max(1_200),
+  followUps: z.array(followUpSchema).max(2),
+  source: z.enum(["ai", "fallback"]),
+});
+
 const ideaLineSchema = z.string().trim().min(3).max(240);
 
 export const aiIdeasSchema = z.object({

@@ -46,6 +46,21 @@ export const REFINEMENT_LABELS: Record<IdeaRefinement, string> = {
   kid_friendly: "Kid-friendly",
 };
 
+export const EXAMPLE_PROMPTS = [
+  {
+    label: "Jaipur wedding",
+    text: "My sister's wedding in Jaipur in December, around 120 guests, budget ₹4.5 lakh. We want haldi, mehendi, sangeet and pheras with vegetarian food.",
+  },
+  {
+    label: "Kids' birthday",
+    text: "A 7th birthday party in Pune for 30 guests, budget ₹25,000. It should be fun for kids, with a cake, games and simple snacks.",
+  },
+  {
+    label: "RWA community day",
+    text: "Our society in Indore is planning a community festival for about 250 people with a budget of ₹1.2 lakh. We need sound, food, safety and volunteers.",
+  },
+] as const;
+
 export const DEMO_SCENARIO = {
   eventType: "wedding" as const,
   eventDate: "",
