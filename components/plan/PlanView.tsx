@@ -6,6 +6,7 @@ import { PlanTabs } from "@/components/plan/PlanTabs";
 import { TimelinePanel } from "@/components/plan/TimelinePanel";
 import { VendorsPanel, type VendorMessageMap } from "@/components/plan/VendorsPanel";
 import { Notice, type NoticeTone } from "@/components/ui/Notice";
+import { Container } from "@/components/ui/Container";
 import type { SaveStatus } from "@/hooks/usePlanPersistence";
 import { BUDGET_TIER_LABELS, CITY_TIER_LABELS, EVENT_TYPE_LABELS } from "@/lib/constants";
 import { formatDisplayDate } from "@/lib/engine/date";
@@ -78,183 +79,191 @@ export function PlanView({
 
   return (
     <div id="plan-workspace" className="workspace plan-shell">
-      <p className="print-only">Utsav AI · working plan</p>
+      <Container>
+        <p className="print-only">Utsav AI · working plan</p>
 
-      <header className="plan-header">
-        <div>
-          <p className="plan-kicker">Your working plan</p>
-          <h1 id="plan-title" className="plan-title" tabIndex={-1}>
-            {eventLabel} in {brief.city}
-          </h1>
-          <div className="plan-meta">
-            <span>
-              <time dateTime={brief.eventDate}>{formatDisplayDate(brief.eventDate)}</time>
-            </span>
-            <span>{formatNumber(brief.guests)} guests</span>
-            <span>{CITY_TIER_LABELS[brief.cityTier]}</span>
-            <span>
-              {timeline.daysUntil} {timeline.daysUntil === 1 ? "day" : "days"} to go
-            </span>
-            <span>{BUDGET_TIER_LABELS[plan.budget.tier]} budget</span>
+        <header className="plan-header">
+          <div>
+            <p className="plan-kicker">Your working plan</p>
+            <h1 id="plan-title" className="plan-title" tabIndex={-1}>
+              {eventLabel} in {brief.city}
+            </h1>
+            <div className="plan-meta">
+              <span>
+                <time dateTime={brief.eventDate}>
+                  {formatDisplayDate(brief.eventDate)}
+                </time>
+              </span>
+              <span>{formatNumber(brief.guests)} guests</span>
+              <span>{CITY_TIER_LABELS[brief.cityTier]}</span>
+              <span>
+                {timeline.daysUntil} {timeline.daysUntil === 1 ? "day" : "days"} to go
+              </span>
+              <span>{BUDGET_TIER_LABELS[plan.budget.tier]} budget</span>
+            </div>
           </div>
-        </div>
-        <div className="plan-actions no-print">
-          <button type="button" className="btn btn-secondary" onClick={onPrint}>
-            <PrintIcon />
-            Print / save PDF
-          </button>
-          <button type="button" className="btn btn-quiet" onClick={onStartOver}>
-            Start a new plan
-          </button>
-        </div>
-      </header>
+          <div className="plan-actions no-print">
+            <button type="button" className="btn btn-secondary" onClick={onPrint}>
+              <PrintIcon />
+              Print / save PDF
+            </button>
+            <button type="button" className="btn btn-quiet" onClick={onStartOver}>
+              Start a new plan
+            </button>
+          </div>
+        </header>
 
-      <p
-        className="status-line mt-2 no-print"
-        role={saveStatus === "failed" ? "alert" : undefined}
-      >
-        {saveStatus === "idle" ? "" : SAVE_STATUS_TEXT[saveStatus]}
-      </p>
-
-      {saveStatus === "failed" ? (
-        <Notice tone="danger" title="Your edits may not survive a refresh">
-          Browser storage is unavailable, possibly because of private browsing or a full
-          device. Keep this tab open, or print the plan to keep a copy.
-        </Notice>
-      ) : null}
-
-      {planNotice ? (
-        <Notice
-          tone={planNotice.tone}
-          title={planNotice.title}
-          className="plan-disclaimer"
+        <p
+          className="status-line mt-2 no-print"
+          role={saveStatus === "failed" ? "alert" : undefined}
         >
-          {planNotice.body}
-        </Notice>
-      ) : null}
+          {saveStatus === "idle" ? "" : SAVE_STATUS_TEXT[saveStatus]}
+        </p>
 
-      <div className="stat-grid">
-        <div className="stat">
-          <p className="stat-label">Planned budget</p>
-          <p className="stat-value">{formatInr(totals.plannedInr)}</p>
-          <p className="stat-note">
-            {brief.guests > 0
-              ? `${formatInr(plan.budget.perGuestInr)} per guest`
-              : "No guest count"}
-          </p>
-        </div>
-        <div className="stat">
-          <p className="stat-label">Actual recorded</p>
-          <p className="stat-value">{formatInr(totals.actualInr)}</p>
-          <p className="stat-note">
-            {totals.actualRecordedCount === 0
-              ? "No actuals recorded yet"
-              : `${totals.actualRecordedCount} of ${plan.budget.categories.length} lines recorded`}
-          </p>
-        </div>
-        <div className="stat">
-          <p className="stat-label">Tasks done</p>
-          <p className="stat-value">
-            {totals.tasksDone}/{totals.tasksTotal}
-          </p>
-          <p className="stat-note">
-            {totals.tasksDone === totals.tasksTotal
-              ? "Everything is ticked"
-              : `${totals.tasksTotal - totals.tasksDone} still open`}
-          </p>
-        </div>
-        <div className="stat">
-          <p className="stat-label">Vendors booked</p>
-          <p className="stat-value">
-            {totals.vendorsBooked}/{totals.vendorsTotal}
-          </p>
-          <p className="stat-note">
-            {totals.vendorsContacted} contacted · {formatInr(totals.quotedInr)} quoted
-          </p>
-        </div>
-      </div>
+        {saveStatus === "failed" ? (
+          <Notice tone="danger" title="Your edits may not survive a refresh">
+            Browser storage is unavailable, possibly because of private browsing or a full
+            device. Keep this tab open, or print the plan to keep a copy.
+          </Notice>
+        ) : null}
 
-      <Notice tone="info" title="Use this as a working draft">
-        Budget lines are planning estimates, not vendor quotes. Confirm prices,
-        availability, safety requirements and permissions locally. Utsav AI does not book
-        vendors or process payments.
-      </Notice>
+        {planNotice ? (
+          <Notice
+            tone={planNotice.tone}
+            title={planNotice.title}
+            className="plan-disclaimer"
+          >
+            {planNotice.body}
+          </Notice>
+        ) : null}
 
-      {confirmReset ? (
-        <Notice tone="warning" live title="Start a new plan?" className="mt-3">
-          This clears the plan saved in this browser, including budget edits, tasks and
-          vendor notes. Print it first if you want a copy.
-          <div className="mt-2 flex flex-wrap gap-2">
-            <button
-              type="button"
-              className="btn btn-primary btn-small"
-              onClick={onConfirmReset}
-            >
-              Yes, clear and start over
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary btn-small"
-              onClick={onCancelReset}
-            >
-              Keep this plan
-            </button>
+        <div className="stat-grid">
+          <div className="stat">
+            <p className="stat-label">Planned budget</p>
+            <p className="stat-value">{formatInr(totals.plannedInr)}</p>
+            <p className="stat-note">
+              {brief.guests > 0
+                ? `${formatInr(plan.budget.perGuestInr)} per guest`
+                : "No guest count"}
+            </p>
           </div>
-        </Notice>
-      ) : null}
+          <div className="stat">
+            <p className="stat-label">Actual recorded</p>
+            <p className="stat-value">{formatInr(totals.actualInr)}</p>
+            <p className="stat-note">
+              {totals.actualRecordedCount === 0
+                ? "No actuals recorded yet"
+                : `${totals.actualRecordedCount} of ${plan.budget.categories.length} lines recorded`}
+            </p>
+          </div>
+          <div className="stat">
+            <p className="stat-label">Tasks done</p>
+            <p className="stat-value">
+              {totals.tasksDone}/{totals.tasksTotal}
+            </p>
+            <p className="stat-note">
+              {totals.tasksDone === totals.tasksTotal
+                ? "Everything is ticked"
+                : `${totals.tasksTotal - totals.tasksDone} still open`}
+            </p>
+          </div>
+          <div className="stat">
+            <p className="stat-label">Vendors booked</p>
+            <p className="stat-value">
+              {totals.vendorsBooked}/{totals.vendorsTotal}
+            </p>
+            <p className="stat-note">
+              {totals.vendorsContacted} contacted · {formatInr(totals.quotedInr)} quoted
+            </p>
+          </div>
+        </div>
 
-      <div className="mt-4">
-        <PlanTabs
-          tabs={[
-            {
-              id: "budget",
-              label: "Budget",
-              content: (
-                <BudgetPanel
-                  plan={plan}
-                  totals={totals}
-                  onPlannedChange={onBudgetPlannedChange}
-                  onActualChange={onBudgetActualChange}
-                />
-              ),
-            },
-            {
-              id: "timeline",
-              label: "Timeline",
-              content: (
-                <TimelinePanel plan={plan} totals={totals} onToggleTask={onToggleTask} />
-              ),
-            },
-            {
-              id: "vendors",
-              label: "Vendors",
-              content: (
-                <VendorsPanel
-                  plan={plan}
-                  messageStates={vendorMessageStates}
-                  onStatusChange={onVendorStatusChange}
-                  onQuoteChange={onVendorQuoteChange}
-                  onDraftMessage={onDraftVendorMessage}
-                />
-              ),
-            },
-            {
-              id: "ideas",
-              label: "Ideas",
-              content: (
-                <IdeasPanel
-                  plan={plan}
-                  status={ideasStatus}
-                  error={ideasError}
-                  activeRefinement={activeRefinement}
-                  onRefine={onRefine}
-                  onRetry={onRetryIdeas}
-                />
-              ),
-            },
-          ]}
-        />
-      </div>
+        <Notice tone="info" title="Use this as a working draft">
+          Budget lines are planning estimates, not vendor quotes. Confirm prices,
+          availability, safety requirements and permissions locally. Utsav AI does not
+          book vendors or process payments.
+        </Notice>
+
+        {confirmReset ? (
+          <Notice tone="warning" live title="Start a new plan?" className="mt-3">
+            This clears the plan saved in this browser, including budget edits, tasks and
+            vendor notes. Print it first if you want a copy.
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                type="button"
+                className="btn btn-primary btn-small"
+                onClick={onConfirmReset}
+              >
+                Yes, clear and start over
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary btn-small"
+                onClick={onCancelReset}
+              >
+                Keep this plan
+              </button>
+            </div>
+          </Notice>
+        ) : null}
+
+        <div className="mt-4">
+          <PlanTabs
+            tabs={[
+              {
+                id: "budget",
+                label: "Budget",
+                content: (
+                  <BudgetPanel
+                    plan={plan}
+                    totals={totals}
+                    onPlannedChange={onBudgetPlannedChange}
+                    onActualChange={onBudgetActualChange}
+                  />
+                ),
+              },
+              {
+                id: "timeline",
+                label: "Timeline",
+                content: (
+                  <TimelinePanel
+                    plan={plan}
+                    totals={totals}
+                    onToggleTask={onToggleTask}
+                  />
+                ),
+              },
+              {
+                id: "vendors",
+                label: "Vendors",
+                content: (
+                  <VendorsPanel
+                    plan={plan}
+                    messageStates={vendorMessageStates}
+                    onStatusChange={onVendorStatusChange}
+                    onQuoteChange={onVendorQuoteChange}
+                    onDraftMessage={onDraftVendorMessage}
+                  />
+                ),
+              },
+              {
+                id: "ideas",
+                label: "Ideas",
+                content: (
+                  <IdeasPanel
+                    plan={plan}
+                    status={ideasStatus}
+                    error={ideasError}
+                    activeRefinement={activeRefinement}
+                    onRefine={onRefine}
+                    onRetry={onRetryIdeas}
+                  />
+                ),
+              },
+            ]}
+          />
+        </div>
+      </Container>
     </div>
   );
 }

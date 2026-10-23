@@ -136,4 +136,17 @@ describe("IntakePanel", () => {
     renderIntake({ freeTextError: "Add more detail." });
     expect(screen.getByText("Add more detail.")).toBeInTheDocument();
   });
+
+  it("renders How it works as an ordered list with four step items", () => {
+    renderIntake();
+    const orderedList = document.querySelector("#how-it-works ol");
+    expect(orderedList).not.toBeNull();
+    expect(orderedList!.tagName).toBe("OL");
+    const stepItems = orderedList!.querySelectorAll("li");
+    expect(stepItems.length).toBe(4);
+    expect(screen.getByText("Read.")).toBeInTheDocument();
+    expect(screen.getByText("Build.")).toBeInTheDocument();
+    expect(screen.getByText("Personalise.")).toBeInTheDocument();
+    expect(screen.getByText("Keep.")).toBeInTheDocument();
+  });
 });

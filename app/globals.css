@@ -112,9 +112,13 @@ a {
 
 .site-header {
   width: 100%;
-  max-width: 84rem;
-  margin: 0 auto;
-  padding: 1.25rem clamp(1.5rem, 5vw, 3.5rem);
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(255 252 247 / 85%);
+  backdrop-filter: blur(6px);
+}
+
+.header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -167,14 +171,12 @@ main {
 
 .site-footer {
   margin-top: 4rem;
+  padding: 2rem 0 2.5rem;
   border-top: 1px solid var(--color-border);
   background: rgb(255 252 247 / 72%);
 }
 
 .site-footer-inner {
-  max-width: 84rem;
-  margin: 0 auto;
-  padding: 2rem clamp(1.5rem, 5vw, 3.5rem) 2.5rem;
   display: grid;
   gap: 1.5rem;
 }
@@ -193,31 +195,34 @@ main {
 
 .workspace {
   width: 100%;
-  max-width: 84rem;
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 3.5rem) 2rem;
+  padding: 0 0 2rem;
 }
 
 .hero {
   position: relative;
   display: grid;
   gap: 1.25rem;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 3vw, 2rem) 1.75rem;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 1.5rem;
+  overflow: hidden;
 }
 
-.hero::after {
+.hero::before {
   content: "";
   position: absolute;
-  top: 1rem;
-  right: 2%;
-  width: 7.5rem;
-  height: 7.5rem;
-  border: 1px solid rgb(138 90 18 / 24%);
+  top: -4rem;
+  right: -4rem;
+  width: 22rem;
+  height: 22rem;
   border-radius: 999px;
-  box-shadow:
-    1.2rem 1.2rem 0 -1px var(--color-cream),
-    1.2rem 1.2rem 0 0 rgb(138 90 18 / 16%);
+  background: radial-gradient(
+    circle,
+    rgb(123 36 53 / 13%) 0%,
+    rgb(138 90 18 / 9%) 45%,
+    transparent 72%
+  );
+  filter: blur(2px);
   pointer-events: none;
+  aria-hidden: true;
 }
 
 .eyebrow {
@@ -236,7 +241,7 @@ main {
 }
 
 .hero-copy {
-  max-width: 44rem;
+  max-width: 42rem;
   color: var(--color-muted);
   font-size: clamp(1rem, 2vw, 1.14rem);
 }
@@ -279,6 +284,7 @@ main {
 .intake-grid {
   display: grid;
   gap: 1rem;
+  margin-top: 1.25rem;
 }
 
 .section-heading {
@@ -1085,14 +1091,61 @@ main {
 }
 
 .about-strip {
-  margin-top: 1rem;
-  display: grid;
-  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
 }
 
-.about-strip p {
+.about-strip > h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  margin-bottom: 1rem;
+}
+
+.about-steps {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: about-step;
+}
+
+.about-steps > li {
+  display: flex;
+  gap: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  padding: 0.85rem 0.9rem;
+}
+
+.about-step-number {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: var(--color-maroon-soft);
+  color: var(--color-maroon-strong);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.about-step-title {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  margin-bottom: 0.15rem;
+}
+
+.about-step-copy {
   color: var(--color-muted);
   font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 @media (min-width: 40rem) {
@@ -1115,6 +1168,16 @@ main {
   .site-footer-inner {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .about-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .about-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 54rem) {
@@ -1125,7 +1188,7 @@ main {
   .intake-grid {
     grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
     align-items: start;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .intake-grid > .card,
@@ -1138,9 +1201,18 @@ main {
   }
 }
 
+@media (min-width: 64rem) {
+  .intake-grid {
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 34rem) {
-  .hero::after {
-    display: none;
+  .hero::before {
+    width: 14rem;
+    height: 14rem;
+    top: -2rem;
+    right: -2rem;
   }
 
   .plan-meta span + span::before {
@@ -1216,6 +1288,11 @@ main {
   .plan-shell {
     max-width: none;
     padding: 0;
+  }
+
+  /* Containers on print: strip their side padding so content uses full width */
+  .workspace > div {
+    padding: 0 !important;
   }
 
   .plan-header {

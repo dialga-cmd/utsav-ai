@@ -3,6 +3,7 @@ import { DM_Sans, Fraunces } from "next/font/google";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { BrandMark } from "@/components/ui/BrandMark";
+import { Container } from "@/components/ui/Container";
 import "./globals.css";
 
 const bodyFont = DM_Sans({
@@ -45,33 +46,39 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         </a>
         <div className="app-shell">
           <header className="site-header no-print">
-            <Link className="brand-link" href="/" aria-label="Utsav AI home">
-              <BrandMark />
-              <span className="brand-name">Utsav AI</span>
-            </Link>
-            <nav className="site-nav" aria-label="Primary">
-              <a href="#plan-workspace">Plan</a>
-              <a href="#about-utsav">Good to know</a>
-            </nav>
+            <Container>
+              <div className="header-row">
+                <Link className="brand-link" href="/" aria-label="Utsav AI home">
+                  <BrandMark />
+                  <span className="brand-name">Utsav AI</span>
+                </Link>
+                <nav className="site-nav" aria-label="Primary">
+                  <a href="#plan-workspace">Plan</a>
+                  <a href="#about-utsav">Good to know</a>
+                </nav>
+              </div>
+            </Container>
           </header>
           {children}
           <footer id="about-utsav" className="site-footer">
-            <div className="site-footer-inner">
-              <div>
-                <p className="footer-title">A first draft, not a guarantee.</p>
-                <p>
-                  Confirm prices, availability, safety requirements and permissions with
-                  local vendors and authorities. Utsav AI never books anything for you.
-                </p>
+            <Container>
+              <div className="site-footer-inner">
+                <div>
+                  <p className="footer-title">A first draft, not a guarantee.</p>
+                  <p>
+                    Confirm prices, availability, safety requirements and permissions with
+                    local vendors and authorities. Utsav AI never books anything for you.
+                  </p>
+                </div>
+                <div>
+                  <p className="footer-title">Private by default.</p>
+                  <p>
+                    Your plan is saved only in this browser. No account, no guest list
+                    uploads and no third-party analytics.
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="footer-title">Private by default.</p>
-                <p>
-                  Your plan is saved only in this browser. No account, no guest list
-                  uploads and no third-party analytics.
-                </p>
-              </div>
-            </div>
+            </Container>
           </footer>
         </div>
       </body>

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { IntakePanel } from "@/components/intake/IntakePanel";
 import { PlanView, type PlanNotice } from "@/components/plan/PlanView";
 import type { VendorMessageMap } from "@/components/plan/VendorsPanel";
+import { Container } from "@/components/ui/Container";
 import { usePlanPersistence } from "@/hooks/usePlanPersistence";
 import { extractEvent, requestIdeas, requestVendorMessage } from "@/lib/api/client";
 import {
@@ -475,11 +476,13 @@ export function PlanningWorkspace() {
   if (!hydrated) {
     return (
       <div id="plan-workspace" className="workspace">
-        <div className="workspace-loading" role="status">
-          <p>
-            <span className="spinner" aria-hidden="true" /> Loading your saved plan…
-          </p>
-        </div>
+        <Container>
+          <div className="workspace-loading" role="status">
+            <p>
+              <span className="spinner" aria-hidden="true" /> Loading your saved plan…
+            </p>
+          </div>
+        </Container>
       </div>
     );
   }
