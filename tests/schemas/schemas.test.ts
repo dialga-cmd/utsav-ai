@@ -10,6 +10,7 @@ import {
   calendarDateSchema,
   eventBriefSchema,
   eventFormSchema,
+  parseEventType,
 } from "@/lib/schemas/event";
 import { planSnapshotSchema } from "@/lib/schemas/plan";
 import { makeBrief } from "@/tests/factories";
@@ -41,6 +42,13 @@ describe("event schemas", () => {
       false,
     );
     expect(eventFormSchema.safeParse({ ...makeBrief(), city: "" }).success).toBe(false);
+  });
+
+  it("parses valid event types and rejects unknown strings", () => {
+    expect(parseEventType("wedding")).toBe("wedding");
+    expect(parseEventType("birthday")).toBe("birthday");
+    expect(parseEventType("community")).toBe("community");
+    expect(parseEventType("invalid")).toBeNull();
   });
 
   it("caps unbounded input lengths", () => {

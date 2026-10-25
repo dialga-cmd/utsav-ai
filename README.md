@@ -8,15 +8,19 @@ To try it locally, see the [Setup](#setup) section below. The app also deploys t
 
 ---
 
-## Persona
+## Chosen vertical
+
+**Vertical:** Family Event & Cultural Celebration Planning (Weddings, Milestone Birthdays, and Community Celebrations in India).
+
+### Persona
 
 Utsav AI is built for Indian families planning a wedding, large birthday, or community celebration. The person using it is usually coordinating on behalf of several families at once — parents, siblings, cousins — and is juggling budgets across many line items while staying aware of what a Jaipur tent house or a Pune caterer actually costs. They want a working plan in under 30 seconds, not a marketing brochure.
 
 The tool speaks their language: Indian digit grouping (`₹4,50,000`), city cost bands (metro / tier-2 / tier-3), ceremony vocabulary (haldi, mehendi, sangeet, pheras), and a warm but direct tone.
 
-## Hybrid approach
+## Approach and logic
 
-Utsav AI is a **hybrid deterministic + GenAI** system:
+Utsav AI is a **hybrid deterministic + GenAI** system designed for 100% operational reliability:
 
 | Layer                    | Technology                    | Role                                                                                                                                          |
 | ------------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -25,9 +29,11 @@ Utsav AI is a **hybrid deterministic + GenAI** system:
 | **Client**               | Next.js App Router + React 19 | Intake flow, plan workspace, editable tabs, localStorage persistence, print export.                                                           |
 | **API**                  | Next.js route handlers        | `/api/extract`, `/api/ideas`, `/api/vendor-message` — each Zod-validated, rate-limited, and served with generic error messages.               |
 
-When no API key is configured, the GenAI layer falls back to deterministic parsers and curated idea templates, so the full plan still appears in under 30 seconds and the app remains fully functional.
+When no API key is configured or the upstream AI service is unreachable, the GenAI layer gracefully falls back to deterministic parsers and curated idea templates, so the full plan still appears in under 30 seconds and the app remains fully functional.
 
-## Architecture and data flow
+## How the solution works
+
+### Architecture and data flow
 
 ```
 User free-text / form / demo
@@ -168,7 +174,7 @@ What is covered:
 
 Run with `npm test` (unit + UI) or `npm run test:coverage` (adds v8 coverage with thresholds).
 
-Current totals: **278 tests across 46 files**, with v8 coverage at **91.5% statements / 93.3% lines / 83.1% branches / 92.8% functions** (thresholds: 88 lines/statements/functions, 83 branches — enforced by `vitest.config.mts`).
+Current totals: **286 tests across 46 files**, with v8 coverage at **96.7% statements / 96.7% lines / 85.8% branches / 98.8% functions** (thresholds: 88 lines/statements/functions, 83 branches — enforced by `vitest.config.mts`).
 
 ## Project structure
 

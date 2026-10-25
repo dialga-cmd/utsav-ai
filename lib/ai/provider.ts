@@ -69,6 +69,9 @@ class GeminiProvider implements AiProvider {
           temperature: request.temperature ?? 0.5,
           maxOutputTokens: request.maxOutputTokens ?? DEFAULT_MAX_OUTPUT_TOKENS,
           responseMimeType: "application/json",
+          thinkingConfig: {
+            thinkingBudget: 0,
+          },
         },
       }),
       signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),

@@ -68,6 +68,52 @@ describe("useVendorMessages", () => {
       result.current.abortVendorRequests();
     });
   });
+
+  it("handles null plan gracefully", async () => {
+    const { result } = renderHook(() => useVendorMessages(null));
+    await act(async () => {
+      await result.current.handleDraftVendorMessage({ id: "v1", name: "Caterer" });
+    });
+    expect(result.current.vendorMessageStates).toEqual({});
+  });
+
+  it("handles AbortError and generic errors in describeError", async () => {
+    const plan = makePlan();
+    const { result } = renderHook(() => useVendorMessages(plan));
+    const vendor = plan.vendors[0];
+
+    // AbortError
+    const abortErr = new Error("Timeout");
+    abortErr.name = "AbortError";
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(abortErr);
+    await act(async () => {
+      await result.current.handleDraftVendorMessage(vendor);
+    });
+    expect(result.current.vendorMessageStates[vendor.id]).toMatchObject({
+      status: "error",
+      error: "The request took too long. Please try again.",
+    });
+
+    // Custom Error
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new Error("Custom failure"));
+    await act(async () => {
+      await result.current.handleDraftVendorMessage(vendor);
+    });
+    expect(result.current.vendorMessageStates[vendor.id]).toMatchObject({
+      status: "error",
+      error: "Custom failure",
+    });
+
+    // TypeError fallback
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new TypeError("Network error"));
+    await act(async () => {
+      await result.current.handleDraftVendorMessage(vendor);
+    });
+    expect(result.current.vendorMessageStates[vendor.id]).toMatchObject({
+      status: "error",
+      error: "The service could not be reached. Check your connection and try again.",
+    });
+  });
   it("returns early when plan is null", async () => {
     const { result } = renderHook(() => useVendorMessages(null));
     await act(async () => {

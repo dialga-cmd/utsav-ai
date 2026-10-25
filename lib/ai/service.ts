@@ -77,7 +77,7 @@ export async function extractEventDetails(
         system: EXTRACTION_SYSTEM_PROMPT,
         prompt: buildExtractionPrompt(text, formatCalendarDate(deps.now ?? new Date())),
         temperature: 0.1,
-        maxOutputTokens: 512,
+        maxOutputTokens: 1_024,
       },
       aiExtractionSchema,
       `extract:${text}`,
@@ -95,7 +95,13 @@ export async function extractEventDetails(
     };
 
     return { ...extracted, followUps: buildFollowUps(extracted) };
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV !== "test") {
+      console.warn(
+        "AI extraction failed, using deterministic fallback:",
+        error instanceof Error ? error.message : error,
+      );
+    }
     return fallback;
   }
 }
@@ -139,7 +145,13 @@ export async function generateIdeas(
     );
 
     return { ...ai, source: "ai" };
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV !== "test") {
+      console.warn(
+        "AI ideas generation failed, using deterministic fallback:",
+        error instanceof Error ? error.message : error,
+      );
+    }
     return fallback;
   }
 }
@@ -173,7 +185,13 @@ export async function draftVendorMessage(
     );
 
     return { ...ai, source: "ai" };
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV !== "test") {
+      console.warn(
+        "AI vendor drafting failed, using deterministic fallback:",
+        error instanceof Error ? error.message : error,
+      );
+    }
     return fallback;
   }
 }

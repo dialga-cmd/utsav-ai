@@ -19,6 +19,19 @@ describe("fallback engine extras", () => {
     expect(res.budgetInr).toBe(450000);
     expect(res.eventType).toBe("wedding");
   });
+  it("extractEventFallback parses numeric slash dates and month-first dates", () => {
+    const resSlash = extractEventFallback(
+      "Birthday in Pune on 15/12/2027 for 50 guests",
+      new Date("2026-06-01T00:00:00Z"),
+    );
+    expect(resSlash.eventDate).toBe("2027-12-15");
+
+    const resMonthFirst = extractEventFallback(
+      "Community event in Delhi on October 15, 2027",
+      new Date("2026-06-01T00:00:00Z"),
+    );
+    expect(resMonthFirst.eventDate).toBe("2027-10-15");
+  });
   it("extractEventFallback returns nulls when nothing is parseable", () => {
     const res = extractEventFallback(
       "I need to plan something but not sure when",

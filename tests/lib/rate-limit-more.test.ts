@@ -55,4 +55,15 @@ describe("rate limiter deeper", () => {
     expect(later.allowed).toBe(true);
     expect(later.remaining).toBe(RATE_LIMIT_MAX_REQUESTS - 1);
   });
+
+  it("prunes clients when capacity is reached or entries expire", () => {
+    resetRateLimits();
+    const now = 1_000_000;
+    for (let i = 0; i <= 10_001; i++) {
+      consumeRateLimit(`client-${i}`, now);
+    }
+    // Now trigger prune with expired entries
+    const result = consumeRateLimit("new-client", now + 70_000);
+    expect(result.allowed).toBe(true);
+  });
 });

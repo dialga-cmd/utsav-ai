@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import type { IntakeErrors, IntakeFormValues } from "@/lib/intake";
 import { createEmptyIntake } from "@/lib/intake";
@@ -152,6 +152,56 @@ describe("IntakePanel", () => {
 });
 
 describe("IntakePanel additional interactions", () => {
+  beforeEach(() => {
+    cleanup();
+  });
+
+  it("fires onFieldChange for form input fields", () => {
+    const onFieldChange = vi.fn();
+    render(
+      <IntakePanel
+        values={createEmptyIntake()}
+        errors={{}}
+        freeText=""
+        freeTextError={null}
+        followUps={[]}
+        restoreNotice={null}
+        isExtracting={false}
+        statusMessage=""
+        onFreeTextChange={() => {}}
+        onExample={() => {}}
+        onDemo={() => {}}
+        onExtract={() => {}}
+        onFieldChange={onFieldChange}
+        onSubmit={() => {}}
+      />,
+    );
+
+    const dateInput = screen.getByLabelText(/^event date$/i);
+    fireEvent.change(dateInput, { target: { value: "2027-11-20" } });
+    expect(onFieldChange).toHaveBeenCalledWith("eventDate", "2027-11-20");
+
+    const eventTypeSelect = screen.getByLabelText(/^event type$/i);
+    fireEvent.change(eventTypeSelect, { target: { value: "birthday" } });
+    expect(onFieldChange).toHaveBeenCalledWith("eventType", "birthday");
+
+    const guestsInput = screen.getByLabelText(/^guests$/i);
+    fireEvent.change(guestsInput, { target: { value: "150" } });
+    expect(onFieldChange).toHaveBeenCalledWith("guests", "150");
+
+    const budgetInput = screen.getByLabelText(/^total budget$/i);
+    fireEvent.change(budgetInput, { target: { value: "300000" } });
+    expect(onFieldChange).toHaveBeenCalledWith("budgetInr", "300000");
+
+    const cityInput = screen.getByLabelText(/city or town/i);
+    fireEvent.change(cityInput, { target: { value: "Indore" } });
+    expect(onFieldChange).toHaveBeenCalledWith("city", "Indore");
+
+    const notesInput = screen.getByLabelText(/food, ceremonies and must-haves/i);
+    fireEvent.change(notesInput, { target: { value: "Pure veg catering" } });
+    expect(onFieldChange).toHaveBeenCalledWith("notes", "Pure veg catering");
+  });
+
   it("shows restoring notice", () => {
     const { container } = render(
       <IntakePanel
