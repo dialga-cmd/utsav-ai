@@ -28,6 +28,10 @@ interface VendorsPanelProps {
   onDraftMessage: (vendor: VendorEntry) => void;
 }
 
+/**
+ * Vendor checklist and outreach panel: category tracking, quotation records,
+ * and AI-drafted enquiry messages for WhatsApp, SMS, or email.
+ */
 export function VendorsPanel({
   plan,
   messageStates,

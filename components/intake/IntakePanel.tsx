@@ -43,6 +43,10 @@ function buildDescribedBy(
   return ids.length > 0 ? ids.join(" ") : undefined;
 }
 
+/**
+ * Primary user intake panel: dual-mode free-text note extraction with Gemini
+ * and structured fallback manual form input with validation errors and follow-ups.
+ */
 export function IntakePanel({
   values,
   errors,

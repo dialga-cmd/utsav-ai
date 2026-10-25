@@ -19,6 +19,7 @@ export interface VendorMessagePromptContext {
   notes: string;
 }
 
+/** Construct a safe vendor enquiry prompt isolated from prompt injection via JSON encoding. */
 export function buildVendorMessagePrompt(context: VendorMessagePromptContext): string {
   return `Event brief (untrusted JSON data):
 <event_brief>

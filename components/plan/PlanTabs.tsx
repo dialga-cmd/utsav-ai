@@ -12,6 +12,10 @@ interface PlanTabsProps {
   tabs: PlanTab[];
 }
 
+/**
+ * Accessible ARIA tablist with keyboard roving focus (ArrowLeft/Right, Home, End)
+ * and screen-reader announcements via a polite aria-live region.
+ */
 export function PlanTabs({ tabs }: PlanTabsProps) {
   const [activeId, setActiveId] = useState(tabs[0]?.id ?? "");
   const [announcement, setAnnouncement] = useState("");

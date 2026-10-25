@@ -16,6 +16,7 @@ Rules:
 - If a detail is missing or uncertain, use null.
 Return JSON only, with no markdown.`;
 
+/** Construct an isolated extraction prompt wrapping untrusted user input as serialized JSON data. */
 export function buildExtractionPrompt(text: string, today: string): string {
   return `Current date: ${today}
 

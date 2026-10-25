@@ -11,6 +11,10 @@ interface NoticeProps {
   className?: string;
 }
 
+/**
+ * Accessible status alert banner with non-colour cues, customizable tone,
+ * and optional polite live-region announcement.
+ */
 export function Notice({
   tone = "info",
   title,

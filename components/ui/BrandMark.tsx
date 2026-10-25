@@ -1,3 +1,4 @@
+/** Inline SVG brandmark emblem depicting a celebratory diya / archway. */
 export function BrandMark() {
   return (
     <svg aria-hidden="true" focusable="false" viewBox="0 0 44 44" className="brand-mark">

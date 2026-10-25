@@ -17,6 +17,10 @@ interface TimelinePanelProps {
   onToggleTask: (taskId: string) => void;
 }
 
+/**
+ * Interactive countdown timeline: back-planned task execution, urgency indicators,
+ * completion toggles, and countdown progress bar.
+ */
 export function TimelinePanel({ plan, totals, onToggleTask }: TimelinePanelProps) {
   const { timeline } = plan;
   const progress =

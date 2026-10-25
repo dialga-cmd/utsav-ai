@@ -216,10 +216,12 @@ export const REFINEMENT_OVERLAYS: Record<
   },
 };
 
+/** Retrieve base celebration concepts for an event type and brief. */
 export function getBaseIdeas(eventType: EventType, brief: EventBrief): IdeaDraft {
   return baseIdeas(eventType, brief);
 }
 
+/** Retrieve refinement overlay items based on selected refinement chips. */
 export function getRefinementOverlay(
   eventType: EventType,
   refinement: IdeaRefinement | null,
@@ -228,6 +230,7 @@ export function getRefinementOverlay(
   return REFINEMENT_OVERLAYS[eventType][refinement];
 }
 
+/** Pure merge of base idea draft with refinement overlay concepts. */
 export function mergeIdeas(base: IdeaDraft, overlay: Partial<IdeaDraft>): IdeaDraft {
   return {
     theme: overlay.theme ?? base.theme,

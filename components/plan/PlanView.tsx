@@ -51,6 +51,10 @@ const SAVE_STATUS_TEXT: Record<Exclude<SaveStatus, "idle">, string> = {
   failed: "Could not save to this browser",
 };
 
+/**
+ * Complete plan presentation view: overview statistics, disclaimer notices,
+ * tab panels (Budget, Timeline, Vendors, Ideas), and reset confirmation modal.
+ */
 export function PlanView({
   plan,
   totals,

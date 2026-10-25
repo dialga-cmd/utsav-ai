@@ -25,10 +25,12 @@ export function parseCalendarDate(value: string): Date | null {
   return date;
 }
 
+/** Format a UTC Date object to an ISO YYYY-MM-DD string. */
 export function formatCalendarDate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+/** Add a whole number of calendar days to a Date object using UTC milliseconds. */
 export function addCalendarDays(date: Date, days: number): Date {
   return new Date(date.getTime() + days * MS_PER_DAY);
 }

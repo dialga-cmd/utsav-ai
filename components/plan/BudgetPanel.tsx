@@ -13,6 +13,10 @@ interface BudgetPanelProps {
   onActualChange: (categoryId: string, amount: number | null) => void;
 }
 
+/**
+ * Interactive budget management panel: category allocations, planned vs actual inputs,
+ * variance calculations, and largest-remainder integrity validation.
+ */
 export function BudgetPanel({
   plan,
   totals,

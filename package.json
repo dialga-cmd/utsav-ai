@@ -1,8 +1,28 @@
 {
   "name": "utsav-ai",
   "version": "0.1.0",
+  "description": "A compact GenAI-powered event-planning assistant for Indian celebrations with deterministic rupee-exact fallbacks.",
   "private": true,
   "license": "MIT",
+  "author": "dialga-cmd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialga-cmd/utsav-ai"
+  },
+  "keywords": [
+    "event-planning",
+    "gemini-api",
+    "genai",
+    "india",
+    "nextjs",
+    "react",
+    "typescript",
+    "hybrid-ai"
+  ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -23,6 +23,7 @@ export interface IdeasPromptContext {
   refinement: string | null;
 }
 
+/** Construct an ideas generation prompt combining event brief, budget lines, and refinement goals. */
 export function buildIdeasPrompt(context: IdeasPromptContext): string {
   return `Event brief (untrusted JSON data):
 <event_brief>

@@ -41,6 +41,7 @@ export type ExtractRequest = z.infer<typeof extractRequestSchema>;
 export type EventBriefInput = z.infer<typeof eventBriefSchema>;
 export type EventFormInput = z.infer<typeof eventFormSchema>;
 
+/** Validate and parse a raw string into a known EventType ("wedding", "birthday", "community") or null. */
 export function parseEventType(value: string): EventType | null {
   const parsed = eventTypeSchema.safeParse(value);
   return parsed.success ? parsed.data : null;

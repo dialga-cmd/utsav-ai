@@ -23,6 +23,10 @@ const IDEA_GROUPS = [
   { key: "gifts", title: "Gifts & keepsakes" },
 ] as const;
 
+/**
+ * Culturally grounded ideas panel: themes, ceremony activities, catering concepts,
+ * return gifts, rupee-saving tips, and dynamic refinement chips.
+ */
 export function IdeasPanel({
   plan,
   status,

@@ -126,6 +126,17 @@ npm run lint
 npm run typecheck
 ```
 
+## Code Quality
+
+Utsav AI enforces clean code, maintainability, and structural standards (see [docs/code-quality.md](docs/code-quality.md)):
+
+- **Strict Layered Decoupling.** Pure deterministic mathematical engines (`lib/engine/`) are completely decoupled from UI components and external AI services.
+- **Strict TypeScript.** Configured with `"strict": true`, `"noUnusedLocals": true`, `"noUnusedParameters": true`, and zero `any` types across the entire codebase.
+- **State & Presentation Separation.** View components are light presentational shells; state, timers, and abort controllers are isolated inside custom React hooks (`usePlanningWorkspace`, `useExtraction`, `useIdeas`, `useVendorMessages`, `usePlanPersistence`).
+- **JSDoc Documentation.** Every exported function, data schema, and React component includes clear JSDoc annotations detailing parameters, return contracts, and edge-case behavior.
+- **Predictable Error Boundaries.** Graceful fallback mechanisms prevent runtime crashes. Model failures in production log informative diagnostic warnings without interrupting the user workflow.
+- **Automated Hygiene.** Enforced via ESLint 9, Prettier, and TypeScript compiler checks in CI.
+
 ## Security
 
 - **Server-only API key.** `GEMINI_API_KEY` is read exclusively in Node route handlers. It is never exposed to the browser, client bundle, or source control.
