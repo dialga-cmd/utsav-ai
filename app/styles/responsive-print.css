@@ -1,0 +1,232 @@
+/* responsive-print.css — media queries (responsive grid, reduced motion, print) */
+
+@media (min-width: 40rem) {
+  .field-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .vendor-controls {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .idea-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .about-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 54rem) {
+  .hero {
+    padding-top: 3.75rem;
+  }
+
+  .intake-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .intake-grid > .card,
+  .intake-grid > form {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .vendor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .intake-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 34rem) {
+  .hero::before {
+    display: none;
+  }
+
+  .plan-meta span + span::before {
+    display: none;
+  }
+
+  .plan-meta span {
+    display: block;
+    margin-top: 0.18rem;
+  }
+
+  .plan-actions .btn {
+    flex: 1;
+  }
+
+  .money-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #111 !important;
+    font-size: 10.5pt;
+  }
+
+  .app-shell {
+    display: block;
+  }
+
+  .no-print,
+  .site-header,
+  .site-footer,
+  .skip-link {
+    display: none !important;
+  }
+
+  .print-only {
+    display: inline !important;
+  }
+
+  .workspace,
+  .plan-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Containers on print: strip their side padding so content uses full width */
+  .workspace .max-w-6xl {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .plan-header {
+    break-after: avoid;
+    padding-bottom: 0.6rem;
+  }
+
+  .plan-title {
+    font-size: 24pt;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat,
+  .card,
+  .task,
+  .budget-row,
+  .vendor-card,
+  .idea-card,
+  .savings {
+    border-color: #bbb !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .tablist {
+    display: none !important;
+  }
+
+  .plan-panel {
+    display: block !important;
+    margin: 0.8rem 0 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    padding: 0;
+  }
+
+  .plan-panel[hidden] {
+    display: block !important;
+  }
+
+  .panel-heading {
+    break-after: avoid;
+    margin-top: 0.5rem;
+  }
+
+  .budget-list,
+  .task-list,
+  .vendor-grid,
+  .idea-grid {
+    gap: 0.45rem;
+  }
+
+  .budget-row,
+  .task,
+  .vendor-card,
+  .idea-card,
+  .savings {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .idea-grid,
+  .vendor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .budget-bar {
+    display: none;
+  }
+
+  .notice,
+  .idea-theme {
+    break-inside: avoid;
+  }
+
+  .print-break {
+    break-before: page;
+  }
+
+  a[href]::after {
+    content: "";
+  }
+}

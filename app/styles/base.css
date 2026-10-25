@@ -1,0 +1,89 @@
+/* base.css — theme, elements, and reset */
+
+@theme {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --color-cream: #faf6ef;
+  --color-surface: #fffcf7;
+  --color-surface-muted: #f5ede1;
+  --color-ink: #2c1b16;
+  --color-muted: #625049;
+  --color-border: #dccbb7;
+  --color-maroon: #7b2435;
+  --color-maroon-strong: #5f1425;
+  --color-maroon-soft: #f8eaec;
+  --color-gold: #8a5a12;
+  --color-gold-soft: #fbf1da;
+  --color-green: #215c43;
+  --color-green-soft: #eaf5ee;
+  --color-focus: #1d4ed8;
+  --color-urgent: #9a3412;
+  --color-urgent-soft: #fff0e8;
+  --color-tight: #76500d;
+  --color-tight-soft: #fff7df;
+  --color-ontrack: #1c6044;
+  --color-ontrack-soft: #eaf6ef;
+}
+
+:root {
+  color-scheme: light;
+  /* Self-hosted font families declared in app/fonts.css */
+  --font-dm-sans: "DM Sans";
+  --font-fraunces: "Fraunces";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-image:
+    radial-gradient(circle at 8% 4%, rgb(123 36 53 / 7%), transparent 29rem),
+    radial-gradient(circle at 92% 30%, rgb(138 90 18 / 7%), transparent 32rem);
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-maroon);
+  text-underline-offset: 0.2em;
+}
+
+::selection {
+  background: var(--color-maroon-soft);
+  color: var(--color-maroon-strong);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}

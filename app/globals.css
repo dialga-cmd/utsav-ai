@@ -1,0 +1,8 @@
+/* globals.css — composition root. Partial stylesheets are imported below. */
+
+@import "tailwindcss";
+@import "./styles/base.css";
+@import "./styles/layout.css";
+@import "./styles/intake.css";
+@import "./styles/plan.css";
+@import "./styles/responsive-print.css";
